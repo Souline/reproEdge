@@ -1,0 +1,44 @@
+group 'geb'
+version '1.0-SNAPSHOT'
+
+ext {
+
+    ext {
+
+        gebVersion = '1.1.1'
+        seleniumVersion = '3.4.0'
+        chromeDriverVersion = '2.24'
+
+    }
+}
+
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'project-report'
+
+repositories {
+    maven {
+        url("https://plugins.gradle.org/m2/")
+    }
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.3.11'
+    testCompile 'org.codehaus.groovy:groovy-all:2.3.11'
+
+    testCompile "org.gebish:geb-core:1.1.1"
+    testCompile "org.gebish:geb-spock:$gebVersion"
+    testCompile "org.spockframework:spock-core:1.1-groovy-2.4"
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    testCompile "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
+    testCompile "org.seleniumhq.selenium:selenium-ie-driver:$seleniumVersion"
+    testCompile "org.seleniumhq.selenium:selenium-firefox-driver:3.4.0"
+    testCompile "org.seleniumhq.selenium:selenium-edge-driver:$seleniumVersion"
+    testRuntime "org.seleniumhq.selenium:selenium-support:$seleniumVersion"
+}
+
+test {
+    systemProperties System.getProperties()
+}
